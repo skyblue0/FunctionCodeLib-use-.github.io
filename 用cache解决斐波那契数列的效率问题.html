@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+  <title>cache解决斐波那契数列效率问题</title>
+
+</head>
+<body>
+<script>
+  function creatCache() {
+    var obj = {};
+    var keys = [];
+    
+    function cache(key, value) {
+      if (value) {
+        if (keys.push(key) > 500) {
+          delete obj[keys.shift()];//超出上限删除第一个数据
+        }
+        return obj[key] = value;//保存当前数据
+      } else {
+        return obj[key];//返回读取值
+      }
+    }
+    
+    return cache;
+  }
+  var cache = creatCache();
+  function fbn(n) {
+    var num = cache(n);
+    if (num) {
+      return num;
+    } else {
+      if (n == 1 || n == 2) {
+        num = 1;
+      }else{
+        num = fbn(n - 1) + fbn(n - 2);
+      }
+      cache(n, num);
+      return num;
+    }
+  }
+  console.log(fbn(20));
+
+</script>
+</body>
+</html>

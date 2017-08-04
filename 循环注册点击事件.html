@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+
+  <title>循环注册点击事件</title>
+
+</head>
+<body>
+<div>这是第1个</div>
+<div>这是第2个</div>
+<div>这是第3个</div>
+<div>这是第4个</div>
+<div>这是第5个</div>
+<div>这是第6个</div>
+<div>这是第7个</div>
+<div>这是第8个</div>
+<div>这是第9个</div>
+<div>这是第10个</div>
+<script>
+  var divs = document.querySelectorAll("div");
+  for(var i = 0; i < divs.length; i++) {
+    (function (j) {
+      divs[i].onclick = function () {
+        alert("这是第"+j+"个");
+      }
+    })(i+1);
+  }
+</script>
+</body>
+</html>

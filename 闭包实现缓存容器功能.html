@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+  <title>闭包实现缓存容器功能</title>
+
+</head>
+<body>
+
+<script>
+  //  jquery cache源码实现方法
+  /*function creatCache() {
+   var keys = [];//存储键名
+   function cache(key, value) {
+   if (keys.push(key + " ") > 500) {
+   delete cache[keys.shift()];//超出上限删除第一个键值对
+   }
+   return cache[key + " "] = value;
+   }
+   return cache;
+   }
+   var cache = creatCache();//接收cache函数
+   cache("chbasj","53453");//存储键值
+   cache("女间谍","让人");//存储键值
+   console.log(cache["女间谍 "]);//读取值*/
+  
+  //cache实现
+  function creatCache() {
+    var obj = {};
+    var keys = [];
+    
+    function cache(key, value) {
+      if (value) {
+        if (keys.push(key) > 500) {
+          delete obj[keys.shift()];//超出上限删除第一个数据
+        }
+        return obj[key] = value;//保存当前数据
+      } else {
+        return obj[key];//返回读取值
+      }
+    }
+    return cache;
+  }
+  var cache = creatCache();//接收cache函数
+  cache("chbasj", "53453");//存储键值
+  cache("女间谍", "让人");//存储键值
+  cache("chbasj", "safaf");//存储键值
+  console.log(cache("chbasj"));//读取值
+</script>
+</body>
+</html>
